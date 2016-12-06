@@ -1,11 +1,11 @@
 'use strict';
+
 var clockHours = ['6 am', '7 am', '8 am', '9 am', '10am', '11am', '12pm', '1 pm', '2 pm', '3 pm', '4 pm', '5 pm', '6 pm', '7 pm', '8 pm'];
 
-
 var firstAndPike = {
-  minCustomersPerHour: 2,
-  maxCustomersPerHour: 16,
-  averageCookiesPerCustomer: 4.6,
+  minCustomersPerHour: 23,
+  maxCustomersPerHour: 65,
+  averageCookiesPerCustomer: 6.3,
   cookiesSoldEachHour:  [],
   totalfirstAndPikeCookies: 0,
 
@@ -17,14 +17,15 @@ var firstAndPike = {
     for(var i=0; i<clockHours.length; i++) {
       this.cookiesSoldEachHour.push(Math.ceil(this.averageCookiesPerCustomer * (this.randCustomersPerHour())));
       // console.log(this.cookiesSoldEachHour[i], clockHours[i]);
+      this.totalfirstAndPikeCookies += this.cookiesSoldEachHour[i];
     }
   },
 
-  totalCookiesFunction : function (){
-    for(var l=0; l<this.cookiesSoldEachHour.length; l++){
-      this.totalfirstAndPikeCookies += this.cookiesSoldEachHour[l];
-    }
-  },
+  // totalCookiesFunction : function (){
+  //   for(var l=0; l<this.cookiesSoldEachHour.length; l++){
+  //     this.totalfirstAndPikeCookies += this.cookiesSoldEachHour[l];
+  //   }
+  // },
 
   render: function (){
     for(var k=0; k<clockHours.length; k++){
@@ -45,13 +46,13 @@ var firstAndPike = {
 }
 
 firstAndPike.fillCookiesSoldEachHour();
-firstAndPike.totalCookiesFunction();
+// firstAndPike.totalCookiesFunction();
 firstAndPike.render();
 
 var seatacStore = {
-  minCustomersPerHour: 2,
-  maxCustomersPerHour: 16,
-  averageCookiesPerCustomer: 4.6,
+  minCustomersPerHour: 3,
+  maxCustomersPerHour: 24,
+  averageCookiesPerCustomer: 3.7,
   cookiesSoldEachHour:  [],
   totalseatacStoreCookies: 0,
 
@@ -74,9 +75,7 @@ var seatacStore = {
 
   render: function (){
     for(var k=0; k<clockHours.length; k++){
-    // grab the element by id and save it to a variable
-    // create an li element
-    // append the li to the alki ul
+
       var ulseatacStoreElement = document.getElementById('seatacStoreSimCookiesPerHour');
       var liseatacStoreList = document.createElement('li');
       liseatacStoreList.textContent = clockHours[k]+': '+ this.cookiesSoldEachHour[k];
@@ -95,9 +94,9 @@ seatacStore.totalCookiesFunction();
 seatacStore.render();
 
 var seattleCenter = {
-  minCustomersPerHour: 2,
-  maxCustomersPerHour: 16,
-  averageCookiesPerCustomer: 4.6,
+  minCustomersPerHour: 11,
+  maxCustomersPerHour: 38,
+  averageCookiesPerCustomer: 3.7,
   cookiesSoldEachHour:  [],
   totalseattleCenterCookies: 0,
 
@@ -120,9 +119,7 @@ var seattleCenter = {
 
   render: function (){
     for(var k=0; k<clockHours.length; k++){
-    // grab the element by id and save it to a variable
-    // create an li element
-    // append the li to the alki ul
+
       var ulseattleCenterElement = document.getElementById('seattleCenterSimCookiesPerHour');
       var liseattleCenterList = document.createElement('li');
       liseattleCenterList.textContent = clockHours[k]+': '+ this.cookiesSoldEachHour[k];
@@ -141,9 +138,9 @@ seattleCenter.totalCookiesFunction();
 seattleCenter.render();
 //
 var capitolHill = {
-  minCustomersPerHour: 2,
-  maxCustomersPerHour: 16,
-  averageCookiesPerCustomer: 4.6,
+  minCustomersPerHour: 20,
+  maxCustomersPerHour: 38,
+  averageCookiesPerCustomer: 42.3,
   cookiesSoldEachHour:  [],
   totalcapitolHillCookies: 0,
 
@@ -166,9 +163,7 @@ var capitolHill = {
 
   render: function (){
     for(var k=0; k<clockHours.length; k++){
-    // grab the element by id and save it to a variable
-    // create an li element
-    // append the li to the alki ul
+
       var ulcapitolHillElement = document.getElementById('capitolHillSimCookiesPerHour');
       var licapitolHillList = document.createElement('li');
       licapitolHillList.textContent = clockHours[k]+': '+ this.cookiesSoldEachHour[k];
@@ -212,9 +207,7 @@ var alki = {
 
   render: function (){
     for(var k=0; k<clockHours.length; k++){
-    // grab the element by id and save it to a variable
-    // create an li element
-    // append the li to the alki ul
+
       var ulAlkiElement = document.getElementById('alkiSimCookiesPerHour');
       var liAlkiList = document.createElement('li');
       liAlkiList.textContent = clockHours[k]+': '+ this.cookiesSoldEachHour[k];
