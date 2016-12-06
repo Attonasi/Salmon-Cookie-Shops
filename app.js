@@ -17,14 +17,15 @@ var firstAndPike = {
     for(var i=0; i<clockHours.length; i++) {
       this.cookiesSoldEachHour.push(Math.ceil(this.averageCookiesPerCustomer * (this.randCustomersPerHour())));
       // console.log(this.cookiesSoldEachHour[i], clockHours[i]);
+      this.totalfirstAndPikeCookies += this.cookiesSoldEachHour[i];
     }
   },
 
-  totalCookiesFunction : function (){
-    for(var l=0; l<this.cookiesSoldEachHour.length; l++){
-      this.totalfirstAndPikeCookies += this.cookiesSoldEachHour[l];
-    }
-  },
+  // totalCookiesFunction : function (){
+  //   for(var l=0; l<this.cookiesSoldEachHour.length; l++){
+  //     this.totalfirstAndPikeCookies += this.cookiesSoldEachHour[l];
+  //   }
+  // },
 
   render: function (){
     for(var k=0; k<clockHours.length; k++){
@@ -45,7 +46,7 @@ var firstAndPike = {
 }
 
 firstAndPike.fillCookiesSoldEachHour();
-firstAndPike.totalCookiesFunction();
+// firstAndPike.totalCookiesFunction();
 firstAndPike.render();
 
 var seatacStore = {
