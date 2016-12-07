@@ -1,9 +1,54 @@
 'use strict';
 
 var allShops = [];
-
 var clockHours = ['6am', '7am', '8am', '9am', '10am', '11am', '12pm', '1pm', '2pm', '3pm', '4pm', '5pm', '6pm', '7pm'];
 var tableElement = document.getElementById('superTable');
+var chatForm = document.getElementById('salmon-form');
+var clearTable = document.getElementById('superTable');
+
+function handleCommentSubmit(event){
+
+  event.preventDefault();
+  if(!event.target.storeName.value || !event.target.maxCustomersPerHour.value || !event.target.minCustomersPerHour.value || !event.target.averageCookiesPerCustomer.value){
+    return alert('You must fill out all fields!');
+  }
+
+  var storeName = event.target.storeName.value;
+  var minCustomersPerHour = parseInt(event.target.minCustomersPerHour.value);
+  var maxCustomersPerHour = parseInt(event.target.maxCustomersPerHour.value);
+  var averageCookiesPerCustomer = parseInt(event.target.averageCookiesPerCustomer.value);
+
+  console.log(storeName, maxCustomersPerHour, minCustomersPerHour, averageCookiesPerCustomer);
+
+  new MakeShop(storeName, maxCustomersPerHour, minCustomersPerHour, averageCookiesPerCustomer);
+
+  rewriteTable();
+
+  event.target.storeName.value = null;
+  event.target.maxCustomersPerHour.value = null;
+  event.target.minCustomersPerHour.value = null;
+  event.target.averageCookiesPerCustomer.value = null;
+}
+
+chatForm.addEventListener('submit', handleCommentSubmit);
+
+new MakeShop('First And Pike', 23, 65, 6.3);
+new MakeShop('SeaTac Airport', 3, 24, 1.2);
+new MakeShop('Seattle Center', 11, 38, 3.7);
+new MakeShop('Capitol Hill', 20, 38, 2.3);
+new MakeShop('Alki', 2, 16, 4.6);
+
+rewriteTable();
+
+//FUNCTIONS ARE BANISHED BELOW HERE
+
+function rewriteTable (){
+  clearTable.innerHTML = '';
+
+  makeHeader();
+  makeTable();
+  makeFooter();
+}
 
 function makeHeader(){
 
@@ -23,10 +68,8 @@ function makeHeader(){
   tableRow.appendChild(tableHeader);
   tableElement.appendChild(tableRow);
 }
-makeHeader();
 
-function Shop(nameOfShop, minCustomersPerHour, maxCustomersPerHour, averageCookiesPerCustomer){
-
+function MakeShop(nameOfShop, minCustomersPerHour, maxCustomersPerHour, averageCookiesPerCustomer){
   this.nameOfShop = nameOfShop;
   this.cookiesSoldEachHour = [];
   this.totalCookies = 0;
@@ -44,36 +87,9 @@ function Shop(nameOfShop, minCustomersPerHour, maxCustomersPerHour, averageCooki
       this.totalCookies += this.cookiesSoldEachHour[i];
     }
   }
-
-  this.render = function (){
-    this.fillCookiesSoldEachHour();
-
-    var tableRow = document.createElement('tr');
-    var tableData = document.createElement('th');
-    tableData.textContent = this.nameOfShop;
-    tableRow.appendChild(tableData);
-    tableElement.appendChild(tableRow);
-
-    for(var i = 0; i < clockHours.length; i++){
-      tableData = document.createElement('td');
-      tableData.textContent = this.cookiesSoldEachHour[i];
-      tableRow.appendChild(tableData);
-      tableElement.appendChild(tableRow);
-    }
-    tableData = document.createElement('th');
-    tableData.textContent = this.totalCookies;
-    tableRow.appendChild(tableData);
-    tableElement.appendChild(tableRow);
-  }
-  this.render();
+  this.fillCookiesSoldEachHour();
   allShops.push(this);
 }
-
-new Shop('First And Pike', 23, 65, 6.3);
-new Shop('SeaTac Airport', 3, 24, 1.2);
-new Shop('Seattle Center', 11, 38, 3.7);
-new Shop('Capitol Hill', 20, 38, 2.3);
-new Shop('Alki', 2, 16, 4.6);
 
 function makeFooter(){
 
@@ -102,4 +118,26 @@ function makeFooter(){
   tableRow.appendChild(tableHeader);
   tableElement.appendChild(tableRow);
 }
-makeFooter();
+
+
+function makeTable (){
+
+  for(var a=0; a<allShops.length; a++){
+    var tableRow = document.createElement('tr');
+    var tableData = document.createElement('th');
+    tableData.textContent = allShops[a].nameOfShop;
+    tableRow.appendChild(tableData);
+    tableElement.appendChild(tableRow);
+
+    for(var i = 0; i < clockHours.length; i++){
+      tableData = document.createElement('td');
+      tableData.textContent = allShops[a].cookiesSoldEachHour[i];
+      tableRow.appendChild(tableData);
+      tableElement.appendChild(tableRow);
+    }
+    tableData = document.createElement('th');
+    tableData.textContent = allShops[a].totalCookies;
+    tableRow.appendChild(tableData);
+    tableElement.appendChild(tableRow);
+  }
+}
