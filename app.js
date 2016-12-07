@@ -1,6 +1,6 @@
 'use strict';
 
-var clockHours = ['6 am', '7 am', '8 am', '9 am', '10am', '11am', '12pm', '1 pm', '2 pm', '3 pm', '4 pm', '5 pm', '6 pm', '7 pm', '8 pm'];
+var clockHours = ['6 am', '7 am', '8 am', '9 am', '10am', '11am', '12pm', '1 pm', '2 pm', '3 pm', '4 pm', '5 pm', '6 pm', '7 pm',];
 
 var firstAndPike = {
   minCustomersPerHour: 23,
@@ -34,13 +34,13 @@ var firstAndPike = {
     // append the li to the alki ul
       var ulfirstAndPikeElement = document.getElementById('firstAndPikeSimCookiesPerHour');
       var lifirstAndPikeList = document.createElement('li');
-      lifirstAndPikeList.textContent = clockHours[k]+': '+ this.cookiesSoldEachHour[k];
+      lifirstAndPikeList.textContent = clockHours[k]+': '+ this.cookiesSoldEachHour[k]+' cookies.';
       ulfirstAndPikeElement.appendChild(lifirstAndPikeList);
       // console.log(k);
     }
     ulfirstAndPikeElement = document.getElementById('firstAndPikeSimCookiesPerHour');
     lifirstAndPikeList = document.createElement('li');
-    lifirstAndPikeList.textContent = 'Total'+' '+ this.totalfirstAndPikeCookies;
+    lifirstAndPikeList.textContent = 'Total'+' '+ this.totalfirstAndPikeCookies+ ' cookies.';
     ulfirstAndPikeElement.appendChild(lifirstAndPikeList);
   }
 }
