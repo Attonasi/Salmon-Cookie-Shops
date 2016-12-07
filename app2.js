@@ -1,81 +1,110 @@
 'use strict';
 
 var allShops = [];
-var clockHours = ['6 am', '7 am', '8 am', '9 am', '10am', '11am', '12pm', '1 pm', '2 pm', '3 pm', '4 pm', '5 pm', '6 pm', '7 pm'];
+// var allShopsCookiesPerHour = [];
+var clockHours = ['6am', '7am', '8am', '9am', '10am', '11am', '12pm', '1pm', '2pm', '3pm', '4pm', '5pm', '6pm', '7pm'];
+var tableElement = document.getElementById('superTable');
 
-function Shop(nameOfShop, minCustomersPerHour, maxCustomersPerHour, averageCookiesPerCustomer, storeElementID){
 
-  var cookiesSoldEachHour = [];
-  var totalCookies = 0;
+function makeHeader(){
 
-  function randCustomersPerHour (){
-    return Math.floor(Math.random()*(maxCustomersPerHour-minCustomersPerHour+1)+minCustomersPerHour);
+  var tableRow = document.createElement('tr');
+  var tableHeader = document.createElement('th');
+  tableHeader.textContent = 'store';
+  tableRow.appendChild(tableHeader);
+
+  for(var k=0; k<clockHours.length; k++){
+    tableHeader = document.createElement('th');
+    tableHeader.textContent = clockHours[k];
+    tableRow.appendChild(tableHeader);
   }
 
+  tableHeader = document.createElement('th');
+  tableHeader.textContent = 'Daily Location Total';
+  tableRow.appendChild(tableHeader);
+  tableElement.appendChild(tableRow);
+}
+makeHeader();
 
-  function fillCookiesSoldEachHour(){
+function Shop(nameOfShop, minCustomersPerHour, maxCustomersPerHour, averageCookiesPerCustomer){
+
+  this.nameOfShop = nameOfShop;
+  this.cookiesSoldEachHour = [];
+  this.totalCookies = 0;
+  this.minCustomersPerHour = minCustomersPerHour;
+  this.maxCustomersPerHour = maxCustomersPerHour;
+  this.averageCookiesPerCustomer = averageCookiesPerCustomer;
+
+
+  this.randCustomersPerHour = function (){
+    return Math.floor(Math.random()*(this.maxCustomersPerHour-this.minCustomersPerHour+1)+this.minCustomersPerHour);
+  }
+
+  this.fillCookiesSoldEachHour = function (){
     for(var i=0; i<clockHours.length; i++) {
-      cookiesSoldEachHour.push(Math.ceil(averageCookiesPerCustomer * (randCustomersPerHour())));
-          // console.log(this.cookiesSoldEachHour[i], clockHours[i]);
-      totalCookies += cookiesSoldEachHour[i];
+      this.cookiesSoldEachHour.push(Math.ceil(this.averageCookiesPerCustomer * (this.randCustomersPerHour())));
+      this.totalCookies += this.cookiesSoldEachHour[i];
+      // console.log(this.totalCookies, this.cookiesSoldEachHour);
     }
   }
 
+  this.render = function (){
+    this.fillCookiesSoldEachHour();
+    // console.log('arg')
+    // var tableElement = document.getElementById('superTable');
+    var tableRow = document.createElement('tr');
+    var tableData = document.createElement('td');
+    tableData.textContent = this.nameOfShop;
+    tableRow.appendChild(tableData);
+    tableElement.appendChild(tableRow);
 
-  allShops.push()
-  render = function(){
-    fillCookiesSoldEachHour();
+    for(var i = 0; i < clockHours.length; i++){
+      tableData = document.createElement('td');
+      tableData.textContent = this.cookiesSoldEachHour[i];
+      tableRow.appendChild(tableData);
+      tableElement.appendChild(tableRow);
+    }
 
-
-  var thEl = document.createElement('th');
-  var trEL = document.getElementById('storeElementID');
-  trEl.textContent = (hour cookiessold );
+    // tableRow = document.createElement('tr');
+    tableData = document.createElement('td');
+    tableData.textContent = this.totalCookies;
+    tableRow.appendChild(tableData);
+    tableElement.appendChild(tableRow);
   }
+
+  this.render();
+  allShops.push(this);
 }
 
+new Shop('First And Pike', 23, 65, 6.3);
+new Shop('SeaTac Airport', 3, 24, 1.2);
+new Shop('Seattle Center', 11, 38, 3.7);
+new Shop('Capitol Hill', 20, 38, 2.3);
+new Shop('Alki', 2, 16, 4.6);
 
-// new
+function makeFooter(){
 
+  var allShopsTotal = [];
+  var tableRow = document.createElement('tr');
+  var tableHeader = document.createElement('th');
+  // console.log(tableHeader);
+  tableHeader.textContent = 'Total';
+  tableRow.appendChild(tableHeader);
 
-// var firstAndPike = {
-//   minCustomersPerHour: 23,
-//   maxCustomersPerHour: 65,
-//   averageCookiesPerCustomer: 6.3,
-//   cookiesSoldEachHour:  [],
-//   totalfirstAndPikeCookies: 0,
-//
-//   randCustomersPerHour:  function(){
-//     return Math.floor(Math.random()*(this.maxCustomersPerHour-this.minCustomersPerHour+1)+this.minCustomersPerHour);
-//   },
-//
-//   fillCookiesSoldEachHour : function(){
-//     for(var i=0; i<clockHours.length; i++) {
-//       this.cookiesSoldEachHour.push(Math.ceil(this.averageCookiesPerCustomer * (this.randCustomersPerHour())));
-//       // console.log(this.cookiesSoldEachHour[i], clockHours[i]);
-//       this.totalfirstAndPikeCookies += this.cookiesSoldEachHour[i];
-//     }
-//   },
-//
-//   // totalCookiesFunction : function (){
-//   //   for(var l=0; l<this.cookiesSoldEachHour.length; l++){
-//   //     this.totalfirstAndPikeCookies += this.cookiesSoldEachHour[l];
-//   //   }
-//   // },
-//
-//   render: function (){
-//     for(var k=0; k<clockHours.length; k++){
-//     // grab the element by id and save it to a variable
-//     // create an li element
-//     // append the li to the alki ul
-//       var ulfirstAndPikeElement = document.getElementById('firstAndPikeSimCookiesPerHour');
-//       var lifirstAndPikeList = document.createElement('li');
-//       lifirstAndPikeList.textContent = clockHours[k]+': '+ this.cookiesSoldEachHour[k]+' cookies.';
-//       ulfirstAndPikeElement.appendChild(lifirstAndPikeList);
-//       // console.log(k);
-//     }
-//     ulfirstAndPikeElement = document.getElementById('firstAndPikeSimCookiesPerHour');
-//     lifirstAndPikeList = document.createElement('li');
-//     lifirstAndPikeList.textContent = 'Total'+' '+ this.totalfirstAndPikeCookies+ ' cookies.';
-//     ulfirstAndPikeElement.appendChild(lifirstAndPikeList);
-//   }
-// }
+  for(var p=0; p<allShops; p++){
+    console.log(allShops[0]);
+  }
+
+  for(var k=0; k<allShopsTotal.length; k++){
+    tableHeader = document.createElement('th');
+    tableHeader.textContent = allShopsTotal[k];
+    tableRow.appendChild(tableHeader);
+    console.log(allShops[1]);
+  }
+
+  tableHeader = document.createElement('th');
+  tableHeader.textContent = 'Daily Location Total';
+  tableRow.appendChild(tableHeader);
+  tableElement.appendChild(tableRow);
+}
+makeFooter();
