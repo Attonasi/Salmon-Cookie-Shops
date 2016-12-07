@@ -10,7 +10,7 @@ function makeHeader(){
 
   var tableRow = document.createElement('tr');
   var tableHeader = document.createElement('th');
-  tableHeader.textContent = 'store';
+  tableHeader.textContent = 'Store';
   tableRow.appendChild(tableHeader);
 
   for(var k=0; k<clockHours.length; k++){
@@ -99,7 +99,7 @@ function makeFooter(){
     superTotal+=allShops[o].totalCookies;
   }
   tableHeader = document.createElement('th');
-  tableHeader.textContent = superTotal;
+  tableHeader.textContent = 'Super Total '+superTotal;
   tableRow.appendChild(tableHeader);
   tableElement.appendChild(tableRow);
 }

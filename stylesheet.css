@@ -1,12 +1,30 @@
 * {
-  color: black
+  color: black;
+  background-color: #81DAF5;
 }
 
 th {
-  border: 1px solid black;
+  border: 2px solid black;
   text-align: center;
+  background: grey;
+  margin: 0%, 0%, 0%, 0%;
 }
 td {
   border: 1px solid black;
   text-align: center;
+  margin: 0px, 0px, 0px, 0px;
+  background-color: #F5BCA9;
+
+}
+table{
+  border: 2px black solid;
+  background-color: #E6E6E6;
+  padding: 0px 0px 0px 0px;
+
+}
+
+#logo{
+  background-color: #81DAF5;
+  width: auto;
+
 }
