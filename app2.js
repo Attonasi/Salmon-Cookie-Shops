@@ -1,7 +1,7 @@
 'use strict';
 
 var allShops = [];
-// var allShopsCookiesPerHour = [];
+
 var clockHours = ['6am', '7am', '8am', '9am', '10am', '11am', '12pm', '1pm', '2pm', '3pm', '4pm', '5pm', '6pm', '7pm'];
 var tableElement = document.getElementById('superTable');
 
@@ -35,7 +35,6 @@ function Shop(nameOfShop, minCustomersPerHour, maxCustomersPerHour, averageCooki
   this.maxCustomersPerHour = maxCustomersPerHour;
   this.averageCookiesPerCustomer = averageCookiesPerCustomer;
 
-
   this.randCustomersPerHour = function (){
     return Math.floor(Math.random()*(this.maxCustomersPerHour-this.minCustomersPerHour+1)+this.minCustomersPerHour);
   }
@@ -44,14 +43,12 @@ function Shop(nameOfShop, minCustomersPerHour, maxCustomersPerHour, averageCooki
     for(var i=0; i<clockHours.length; i++) {
       this.cookiesSoldEachHour.push(Math.ceil(this.averageCookiesPerCustomer * (this.randCustomersPerHour())));
       this.totalCookies += this.cookiesSoldEachHour[i];
-      // console.log(this.totalCookies, this.cookiesSoldEachHour);
     }
   }
 
   this.render = function (){
     this.fillCookiesSoldEachHour();
-    // console.log('arg')
-    // var tableElement = document.getElementById('superTable');
+
     var tableRow = document.createElement('tr');
     var tableData = document.createElement('td');
     tableData.textContent = this.nameOfShop;
@@ -64,14 +61,11 @@ function Shop(nameOfShop, minCustomersPerHour, maxCustomersPerHour, averageCooki
       tableRow.appendChild(tableData);
       tableElement.appendChild(tableRow);
     }
-
-    // tableRow = document.createElement('tr');
     tableData = document.createElement('td');
     tableData.textContent = this.totalCookies;
     tableRow.appendChild(tableData);
     tableElement.appendChild(tableRow);
   }
-
   this.render();
   allShops.push(this);
 }
@@ -84,26 +78,28 @@ new Shop('Alki', 2, 16, 4.6);
 
 function makeFooter(){
 
-  var allShopsTotal = [];
   var tableRow = document.createElement('tr');
   var tableHeader = document.createElement('th');
-  // console.log(tableHeader);
   tableHeader.textContent = 'Total';
   tableRow.appendChild(tableHeader);
 
-  for(var p=0; p<allShops; p++){
-    console.log(allShops[0]);
-  }
+  for(var k=0; k<allShops[1].cookiesSoldEachHour.length; k++){
 
-  for(var k=0; k<allShopsTotal.length; k++){
+    var allShopsTotal = 0;
+    for(var p=0; p<allShops.length; p++){
+      allShopsTotal += allShops[p].cookiesSoldEachHour[k];
+    }
     tableHeader = document.createElement('th');
-    tableHeader.textContent = allShopsTotal[k];
+    tableHeader.textContent = allShopsTotal;
     tableRow.appendChild(tableHeader);
-    console.log(allShops[1]);
   }
 
+  var superTotal = 0;
+  for(var o=0; o<allShops.length; o++){
+    superTotal+=allShops[o].totalCookies;
+  }
   tableHeader = document.createElement('th');
-  tableHeader.textContent = 'Daily Location Total';
+  tableHeader.textContent = superTotal;
   tableRow.appendChild(tableHeader);
   tableElement.appendChild(tableRow);
 }
