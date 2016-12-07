@@ -8,12 +8,33 @@
   <body>
     <img src="salmon logo.png" id="logo">
 
+    <form id="salmon-form" action="index.html" method="post">
+      <fieldset>
+
+        <label for="storeName">Store Name: </label>
+        <input type="text" name="storeName">
+
+        <label for="minCustomersPerHour">Min Customers</label>
+        <input type="number" name="minCustomersPerHour">
+
+        <label for="maxCustomersPerHour">Max Customers</label>
+        <input type="number" name="maxCustomersPerHour">
+
+        <label for="averageCookiesPerCustomer">Averge Cookies per Customer</label>
+        <input type="number" name="averageCookiesPerCustomer">
+
+
+        <button type="submit">Create new Store.</button>
+
+
+      </fieldset>
+    </form>
+
     <h2>All Shops</h2>
     <table id = "superTable">
 
     </table>
 
-
-    <script src = "app2.js"></script>
+    <script src = "app3.js"></script>
   </body>
 </html>
