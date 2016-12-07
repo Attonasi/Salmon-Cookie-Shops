@@ -99,7 +99,7 @@ function makeFooter(){
     superTotal+=allShops[o].totalCookies;
   }
   tableHeader = document.createElement('th');
-  tableHeader.textContent = superTotal;
+  tableHeader.textContent = 'Super Total ' + superTotal;
   tableRow.appendChild(tableHeader);
   tableElement.appendChild(tableRow);
 }
