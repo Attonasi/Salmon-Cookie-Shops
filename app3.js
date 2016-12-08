@@ -6,6 +6,8 @@ var tableElement = document.getElementById('superTable');
 var chatForm = document.getElementById('salmon-form');
 var clearTable = document.getElementById('superTable');
 
+//Event function gets to stay up here for now
+
 function handleCommentSubmit(event){
 
   event.preventDefault();
@@ -16,9 +18,9 @@ function handleCommentSubmit(event){
   var storeName = event.target.storeName.value;
   var minCustomersPerHour = parseInt(event.target.minCustomersPerHour.value);
   var maxCustomersPerHour = parseInt(event.target.maxCustomersPerHour.value);
-  var averageCookiesPerCustomer = parseInt(event.target.averageCookiesPerCustomer.value);
+  var averageCookiesPerCustomer = (event.target.averageCookiesPerCustomer.value);
 
-  console.log(storeName, maxCustomersPerHour, minCustomersPerHour, averageCookiesPerCustomer);
+  console.log('storeName '+storeName, 'maxCustomersPerHour '+maxCustomersPerHour, 'minCustomersPerHour '+ minCustomersPerHour, averageCookiesPerCustomer);
 
   new MakeShop(storeName, maxCustomersPerHour, minCustomersPerHour, averageCookiesPerCustomer);
 
@@ -99,7 +101,6 @@ function makeFooter(){
   tableRow.appendChild(tableHeader);
 
   for(var k=0; k<allShops[1].cookiesSoldEachHour.length; k++){
-
     var allShopsTotal = 0;
     for(var p=0; p<allShops.length; p++){
       allShopsTotal += allShops[p].cookiesSoldEachHour[k];
