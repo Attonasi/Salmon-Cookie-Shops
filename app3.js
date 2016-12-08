@@ -9,7 +9,7 @@ var salmonForm = document.getElementById('salmon-form');
 
 //Event function gets to stay up here because all of the function calls are in it
 
-function handleCommentSubmit(event){
+function doThings(event){
 
   event.preventDefault();
   if(!event.target.storeName.value || !event.target.maxCustomersPerHour.value || !event.target.minCustomersPerHour.value || !event.target.averageCookiesPerCustomer.value){
@@ -17,8 +17,8 @@ function handleCommentSubmit(event){
   }
 
   var storeName = event.target.storeName.value;
-  var minCustomersPerHour = parseInt(event.target.minCustomersPerHour.value);
-  var maxCustomersPerHour = parseInt(event.target.maxCustomersPerHour.value);
+  var minCustomersPerHour = (event.target.minCustomersPerHour.value);
+  var maxCustomersPerHour = (event.target.maxCustomersPerHour.value);
   var averageCookiesPerCustomer = (event.target.averageCookiesPerCustomer.value);
 
   console.log('storeName '+storeName, 'maxCustomersPerHour '+maxCustomersPerHour, 'minCustomersPerHour '+ minCustomersPerHour, averageCookiesPerCustomer);
@@ -33,7 +33,7 @@ function handleCommentSubmit(event){
   event.target.averageCookiesPerCustomer.value = null;
 }
 
-salmonForm.addEventListener('submit', handleCommentSubmit);
+salmonForm.addEventListener('submit', doThings);
 
 new MakeShop('First And Pike', 23, 65, 6.3);
 new MakeShop('SeaTac Airport', 3, 24, 1.2);
