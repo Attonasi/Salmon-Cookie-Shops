@@ -9,7 +9,7 @@ var salmonForm = document.getElementById('salmon-form');
 
 //Event function gets to stay up here because all of the function calls are in it
 
-function handleCommentSubmit(event){
+function doThings(event){
 
   event.preventDefault();
   if(!event.target.storeName.value || !event.target.maxCustomersPerHour.value || !event.target.minCustomersPerHour.value || !event.target.averageCookiesPerCustomer.value){
@@ -33,7 +33,7 @@ function handleCommentSubmit(event){
   event.target.averageCookiesPerCustomer.value = null;
 }
 
-salmonForm.addEventListener('submit', handleCommentSubmit);
+salmonForm.addEventListener('submit', doThings);
 
 new MakeShop('First And Pike', 23, 65, 6.3);
 new MakeShop('SeaTac Airport', 3, 24, 1.2);
