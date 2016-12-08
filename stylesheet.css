@@ -28,3 +28,27 @@ table{
   width: auto;
 
 }
+
+fieldset {
+border: 2px #F5BCA9 solid;
+width: auto;
+
+}
+
+input {
+  text-align: left;
+  font-size: 9px;
+}
+label {
+  font-size: 14px;
+
+}
+
+.resizedNumberBox {
+  width: 40px;
+}
+
+.salmon-fieldset{
+  display: inline-block;
+  padding: 1px;
+}

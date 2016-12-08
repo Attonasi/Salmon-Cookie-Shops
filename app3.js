@@ -1,12 +1,13 @@
 'use strict';
 
+//Globals
+
 var allShops = [];
 var clockHours = ['6am', '7am', '8am', '9am', '10am', '11am', '12pm', '1pm', '2pm', '3pm', '4pm', '5pm', '6pm', '7pm'];
 var tableElement = document.getElementById('superTable');
-var chatForm = document.getElementById('salmon-form');
-var clearTable = document.getElementById('superTable');
+var salmonForm = document.getElementById('salmon-form');
 
-//Event function gets to stay up here for now
+//Event function gets to stay up here because all of the function calls are in it
 
 function handleCommentSubmit(event){
 
@@ -32,7 +33,7 @@ function handleCommentSubmit(event){
   event.target.averageCookiesPerCustomer.value = null;
 }
 
-chatForm.addEventListener('submit', handleCommentSubmit);
+salmonForm.addEventListener('submit', handleCommentSubmit);
 
 new MakeShop('First And Pike', 23, 65, 6.3);
 new MakeShop('SeaTac Airport', 3, 24, 1.2);
@@ -45,31 +46,13 @@ rewriteTable();
 //FUNCTIONS ARE BANISHED BELOW HERE
 
 function rewriteTable (){
-  clearTable.innerHTML = '';
+  tableElement.innerHTML = '';
 
   makeHeader();
   makeTable();
   makeFooter();
 }
 
-function makeHeader(){
-
-  var tableRow = document.createElement('tr');
-  var tableHeader = document.createElement('th');
-  tableHeader.textContent = 'Store';
-  tableRow.appendChild(tableHeader);
-
-  for(var k=0; k<clockHours.length; k++){
-    tableHeader = document.createElement('th');
-    tableHeader.textContent = clockHours[k];
-    tableRow.appendChild(tableHeader);
-  }
-
-  tableHeader = document.createElement('th');
-  tableHeader.textContent = 'Daily Location Total';
-  tableRow.appendChild(tableHeader);
-  tableElement.appendChild(tableRow);
-}
 
 function MakeShop(nameOfShop, minCustomersPerHour, maxCustomersPerHour, averageCookiesPerCustomer){
   this.nameOfShop = nameOfShop;
@@ -91,6 +74,47 @@ function MakeShop(nameOfShop, minCustomersPerHour, maxCustomersPerHour, averageC
   }
   this.fillCookiesSoldEachHour();
   allShops.push(this);
+}
+
+function makeHeader(){
+
+  var tableRow = document.createElement('tr');
+  var tableHeader = document.createElement('th');
+  tableHeader.textContent = 'Store';
+  tableRow.appendChild(tableHeader);
+
+  for(var k=0; k<clockHours.length; k++){
+    tableHeader = document.createElement('th');
+    tableHeader.textContent = clockHours[k];
+    tableRow.appendChild(tableHeader);
+  }
+
+  tableHeader = document.createElement('th');
+  tableHeader.textContent = 'Daily Location Total';
+  tableRow.appendChild(tableHeader);
+  tableElement.appendChild(tableRow);
+}
+
+function makeTable (){
+
+  for(var a=0; a<allShops.length; a++){
+    var tableRow = document.createElement('tr');
+    var tableData = document.createElement('th');
+    tableData.textContent = allShops[a].nameOfShop;
+    tableRow.appendChild(tableData);
+    tableElement.appendChild(tableRow);
+
+    for(var i = 0; i < clockHours.length; i++){
+      tableData = document.createElement('td');
+      tableData.textContent = allShops[a].cookiesSoldEachHour[i];
+      tableRow.appendChild(tableData);
+      tableElement.appendChild(tableRow);
+    }
+    tableData = document.createElement('th');
+    tableData.textContent = allShops[a].totalCookies;
+    tableRow.appendChild(tableData);
+    tableElement.appendChild(tableRow);
+  }
 }
 
 function makeFooter(){
@@ -118,27 +142,4 @@ function makeFooter(){
   tableHeader.textContent = 'Super Total '+superTotal;
   tableRow.appendChild(tableHeader);
   tableElement.appendChild(tableRow);
-}
-
-
-function makeTable (){
-
-  for(var a=0; a<allShops.length; a++){
-    var tableRow = document.createElement('tr');
-    var tableData = document.createElement('th');
-    tableData.textContent = allShops[a].nameOfShop;
-    tableRow.appendChild(tableData);
-    tableElement.appendChild(tableRow);
-
-    for(var i = 0; i < clockHours.length; i++){
-      tableData = document.createElement('td');
-      tableData.textContent = allShops[a].cookiesSoldEachHour[i];
-      tableRow.appendChild(tableData);
-      tableElement.appendChild(tableRow);
-    }
-    tableData = document.createElement('th');
-    tableData.textContent = allShops[a].totalCookies;
-    tableRow.appendChild(tableData);
-    tableElement.appendChild(tableRow);
-  }
 }

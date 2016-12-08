@@ -9,26 +9,26 @@
     <img src="salmon logo.png" id="logo">
 
     <form id="salmon-form" action="index.html" method="post">
-      <fieldset>
+      <fieldset class="salmon-fieldset">
 
         <label for="storeName">Store Name: </label>
         <input type="text" name="storeName">
 
         <label for="minCustomersPerHour">Min Customers</label>
-        <input type="number" name="minCustomersPerHour">
+        <input type="number" name="minCustomersPerHour" class="resizedNumberBox">
 
         <label for="maxCustomersPerHour">Max Customers</label>
-        <input type="number" name="maxCustomersPerHour">
+        <input type="number" name="maxCustomersPerHour" class="resizedNumberBox">
 
         <label for="averageCookiesPerCustomer">Averge Cookies per Customer</label>
-        <input type="number" step=".1" name="averageCookiesPerCustomer">
+        <input type="number" step=".1" name="averageCookiesPerCustomer" class="resizedNumberBox">
 
-        <button type="submit">Create new Store.</button>
+        <button type="submit">Create new Store!</button>
 
       </fieldset>
     </form>
 
-    <h2>All Shops</h2>
+    <h2>All Super Salmon Cookie Shops!</h2>
     <table id = "superTable">
 
     </table>
