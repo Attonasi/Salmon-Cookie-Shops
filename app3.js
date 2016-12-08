@@ -17,8 +17,8 @@ function doThings(event){
   }
 
   var storeName = event.target.storeName.value;
-  var minCustomersPerHour = parseInt(event.target.minCustomersPerHour.value);
-  var maxCustomersPerHour = parseInt(event.target.maxCustomersPerHour.value);
+  var minCustomersPerHour = (event.target.minCustomersPerHour.value);
+  var maxCustomersPerHour = (event.target.maxCustomersPerHour.value);
   var averageCookiesPerCustomer = (event.target.averageCookiesPerCustomer.value);
 
   console.log('storeName '+storeName, 'maxCustomersPerHour '+maxCustomersPerHour, 'minCustomersPerHour '+ minCustomersPerHour, averageCookiesPerCustomer);
